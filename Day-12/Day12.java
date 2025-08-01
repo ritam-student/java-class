@@ -1,4 +1,3 @@
-import java.util.*;
 
 class Day12 {
     public static void main(String args[]){
@@ -253,7 +252,7 @@ class Day12 {
     public static void trappingWater(int arr[]){
         // tracks all the left max building
         int left[] = new int[arr.length];
-        left[0] = 0;
+        left[0] = arr[0];
 
         for (int i=1; i<arr.length; i++){
             left[i] = Math.max(left[i-1] , arr[i]);
@@ -261,7 +260,7 @@ class Day12 {
 
         // tracks all the right max building
         int right[] = new int[arr.length];
-        right[right.length-1] = 0;
+        right[right.length-1] = arr[arr.length-1];
 
         for (int i=arr.length-1; i>= 0; i--) {
             right[i] = Math.max(right[i+1] , arr[i]);
