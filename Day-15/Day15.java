@@ -16,9 +16,89 @@ class Day15 {
         dll.addFirst(3);
         dll.addFirst(2);
         dll.addFirst(1);
-        dll.printElements();
-        dll.removeLast();
-        dll.printElements();
+        // dll.printElements();
+        // dll.removeLast();
+        // dll.printElements();
+
+        CircularLL cll = new CircularLL();
+        cll.addFirst(3);
+        cll.addFirst(2);
+        cll.addFirst(1);
+        cll.printElements();
+        System.out.println();
+        cll.removeLast();
+        cll.printElements();
+
+
+    }
+
+    static class CircularLL{
+        class Node {
+            int data;
+            Node next;
+
+            public Node (int data){
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public static Node head;
+        public static Node tail;
+
+        public void addFirst(int data){
+            // create a new node
+            Node newNode = new Node(data);
+
+            if (head == null){
+                head = tail = newNode;
+                return;
+            }
+
+            newNode.next = head;
+            head = newNode;
+            // 0->1->2->3->0
+            tail.next = head;
+        }
+
+        public int removeLast(){
+            // base case
+            if (head == null){
+                System.out.println("LL is empty...");
+                return Integer.MIN_VALUE;
+            }
+
+            if (head.next == null){
+                int val = head.data;
+                head = tail = null;
+                return val;
+            }
+
+            Node temp = head;
+            while (temp.next != tail){
+                temp = temp.next;
+            }
+
+            int val = temp.next.data;
+            temp.next = temp.next.next;
+            return val;
+        }
+
+        public void printElements(){
+            if (head == null){
+                System.out.println("LL is empty...");
+                return;
+            }
+            Node temp = head;
+
+            while (temp.next != head){
+                System.out.print(temp.data+"->");
+                temp = temp.next;
+            }
+            System.out.print(temp.data);
+
+            // 1->2->3->1       -> 1->2->3
+        }
 
 
     }
@@ -36,7 +116,28 @@ class Day15 {
         }
 
         public static Node head;
-            public static Node tail;
+        public static Node tail;
+
+        // reverse a Doubly LL
+        public void reverse(){
+            if (head == null || head.next == null){
+                return;
+            }
+            // create 3 var
+            Node prev = null;
+            Node curr = head;
+            Node next;
+
+            while (curr != null){
+                next = curr.next;
+                curr.prev = next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+
+            head = prev;
+        }
 
             // addFirst
             public void addFirst(int data){
