@@ -53,7 +53,9 @@ class Day20 {
         }
     }
     // [2,-1,-1]
-    public static Node createTree(int arr[] , int idx){
+    static int idx = -1;
+    public static Node createTree(int arr[] ){
+        idx++;
         if (arr.length == 0){
             return null;
         }
@@ -63,8 +65,8 @@ class Day20 {
         }
 
         Node newNode = new Node(arr[idx]);
-        newNode.left = createTree(arr, idx+1);
-        newNode.right = createTree(arr, idx+1);
+        newNode.left = createTree(arr);
+        newNode.right = createTree(arr);
         return newNode;
     }
 
